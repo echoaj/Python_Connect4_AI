@@ -71,8 +71,8 @@ class Game:
         self.board[row][col] = 0
 
     def minimax(self, col, depth, alpha, beta, maximizing_player):
-        if depth == 3 or self.winner():
-            return [col, self.heuristic(self.board, col)]
+        if depth == 5 or self.winner():
+            return [col, self.heuristic2(self.board, col)]
 
         if maximizing_player:
             max_best = [6, -1000000]
@@ -97,7 +97,6 @@ class Game:
                     break
             return min_best
 
-    # @staticmethod
     def heuristic(self, grid, pos):
         ai = self.streaks4(2) + self.streaks3(2) + self.streaks2(2)
         pl = self.streaks4(1) + self.streaks3(1) + self.streaks2(1)
@@ -114,6 +113,23 @@ class Game:
         # if self.winner():
         #     score = 6
         return score
+
+    def heuristic2(self, grid, pos):
+        score = 0
+        row = 0
+        while grid[row][pos] == 0:
+            row += 1
+
+        if row <= 2:
+            # Cases where the player can Win
+            if grid[row+1][pos] == grid[row+2][pos] == grid[row+3][pos] == 1:
+                score += 10
+            # Case Where the AI can Win
+            if grid[row + 1][pos] == grid[row + 2][pos] == grid[row + 3][pos] == 2:
+                score += 12
+
+        return score
+
 
     def streaks4(self, plr):
         count = 0

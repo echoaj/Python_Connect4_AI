@@ -10,16 +10,16 @@ def main():
 
 
 
-    num = iter([0,6,3,1,2,3,0,1,5,5,3,1,2,3,4,1])
+    #num = iter([0,6,3,1,2,3,0,1,5,5,3,1,2,3,4,1])
     col = -1
 
     while not game.board_full():
         # PLAYER
         game.display()
         while not game.valid_move(col):
-            #col = int(input(BOLD + "Enter pos: " + END))
-            print(BOLD + "Enter pos: " + END)
-            col = next(num)
+            col = int(input(BOLD + "Enter pos: " + END))
+            #print(BOLD + "Enter pos: " + END)
+            #col = next(num)
         game.player_turn(col)
         # print("Heuristic: ", game.heuristic(game.board, col))
         col = -1
